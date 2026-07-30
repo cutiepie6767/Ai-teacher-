@@ -1,1 +1,378 @@
-# Ai-teacher-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MY AI TEACHER — Lighting Up My World</title>
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-blue: #2563EB;
+      --hover-blue: #1D4ED8;
+      --light-blue: #EFF6FF;
+      --border-blue: #BFDBFE;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --accent-red: #EF4444;
+      --accent-red-hover: #DC2626;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F8FAFC;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    /* Mock Browser Bar */
+    .browser-bar {
+      background-color: #E2E8F0;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-red { background-color: #EF4444; }
+    .dot-yellow { background-color: #F59E0B; }
+    .dot-green { background-color: #10B981; }
+    .browser-url {
+      background-color: #FFFFFF;
+      padding: 4px 16px;
+      border-radius: 20px;
+      flex-grow: 1;
+      max-width: 500px;
+      text-align: center;
+      font-family: monospace;
+      color: var(--primary-blue);
+      font-weight: 600;
+      border: 1px solid #CBD5E1;
+    }
+    /* Navigation Header */
+    header {
+      background-color: #FFFFFF;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-blue);
+      letter-spacing: -0.5px;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: var(--primary-blue);
+    }
+    .btn-donate {
+      background-color: var(--accent-red);
+      color: #FFFFFF !important;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 700 !important;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .btn-donate:hover {
+      background-color: var(--accent-red-hover);
+      transform: translateY(-1px);
+    }
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--light-blue) 100%);
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--primary-blue);
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero p.tagline {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    /* Learning Cards Grid */
+    .learn-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section-title {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 2rem;
+    }
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem; /* Reduced bottom margin to make space for the image */
+    }
+    .card {
+      background: #FFFFFF;
+      border: 2px solid var(--border-blue);
+      border-radius: 12px;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-blue);
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1);
+    }
+    .card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 0.8rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    /* Worksheet Image Styles */
+    .worksheet-container {
+      max-width: 1000px;
+      margin: 0 auto 3rem; /* Center and add space below */
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .worksheet-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      border: 1px solid #E2E8F0; /* Light border to define edges */
+    }
+    /* Main CTA Button */
+    .cta-container {
+      text-align: center;
+      margin: 0rem 0 4rem; /* Adjusted margin since it follows the image */
+    }
+    .cta-btn {
+      display: inline-block;
+      background-color: var(--primary-blue);
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s ease;
+    }
+    .cta-btn:hover {
+      background-color: var(--hover-blue);
+      transform: scale(1.03) translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.5);
+    }
+    /* Info Cards */
+    .info-container {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+    .info-card {
+      background: #FFFFFF;
+      padding: 2.5rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border: 1px solid #E2E8F0;
+    }
+    .info-card h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+    .info-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 1rem;
+    }
+    .steps-list {
+      margin-left: 1.5rem;
+      color: var(--text-dark);
+    }
+    .steps-list li {
+      margin-bottom: 0.8rem;
+    }
+    .prompt-box {
+      background-color: #F1F5F9;
+      border-left: 4px solid var(--primary-blue);
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #334155;
+      margin: 0.8rem 0 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background-color: var(--text-dark);
+      color: #94A3B8;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #60A5FA;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mock Browser Bar -->
+  <div class="browser-bar">
+    <div class="browser-dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    <div class="browser-url">https://MYAITEACHER.com</div>
+  </div>
+  <!-- Header Navigation -->
+  <header>
+    <div class="logo">MY AI TEACHER ⭐️</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About MY AI TEACHER</a></li>
+        <li><a href="#sdg4">What is SDGs 4</a></li>
+        <li><a href="https://www.savethechildren.org" target="_blank" rel="noopener" class="btn-donate">Donation (Save the Children)</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>MY AI TEACHER</h1>
+    <p class="tagline">— Lighting up my world</p>
+  </section>
+  <!-- What You Can Learn -->
+  <main class="learn-section">
+    <h2 class="section-title">What You Can Learn</h2>
+    <div class="cards-container">
+      <div class="card">
+        <h3>Build A Web</h3>
+        <p>Learn coding step-by-step! Master HTML, CSS, and web structure with real-time feedback from your AI mentor.</p>
+      </div>
+      <div class="card">
+        <h3>Learning</h3>
+        <p>Conquer tough school subjects. Get customized explanations, step-by-step problem breakdowns, and quick quizzes.</p>
+      </div>
+      <div class="card">
+        <h3>Financial</h3>
+        <p>Gain real-world skills! Learn personal budgeting, savings habits, and basic financial literacy tailored for students.</p>
+      </div>
+      <div class="card">
+        <h3>Emotion</h3>
+        <p>Prioritize your well-being. Practice mindfulness, exam stress management, positive thinking, and self-encouragement.</p>
+      </div>
+    </div>
+    
+    <!-- Worksheet Image Section added here -->
+    <div class="worksheet-container">
+      <img src="image_0.png" alt="My Own AI Teacher Worksheet" class="worksheet-img">
+    </div>
+
+    <!-- Direct Gemini Gem Link Button -->
+    <div class="cta-container">
+      <a href="https://gemini.google.com/gems/create" target="_blank" rel="noopener" class="cta-btn">Start Your Journey!! ↗</a>
+    </div>
+  </main>
+  <!-- Information Section -->
+  <div class="info-container">
+    
+    <!-- Gemini Gem Instructions -->
+    <section id="about" class="info-card">
+      <h2>How to Create Your Custom AI Teacher on Gemini</h2>
+      <p>Clicking <strong>"Start Your Journey!!"</strong> opens Google's Gemini Gem Creation page. Here is how to complete your AI teacher setup:</p>
+      <ol class="steps-list">
+        <li><strong>Name Your Gem:</strong> Give it a title like <em>"My Web Dev Coach"</em> or <em>"Math Tutor"</em>.</li>
+        <li><strong>Add Instructions:</strong> Copy and paste one of the prompt templates below into the <em>Instructions</em> box.</li>
+        <li><strong>Save & Start:</strong> Click <strong>Save</strong> at the top right to start asking questions!</li>
+      </ol>
+      <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-blue);">Prompt Templates to Copy:</h3>
+      
+      <p><strong>For Web Design:</strong></p>
+      <div class="prompt-box">"You are an encouraging Web Development Tutor for beginners. Explain HTML/CSS concepts using clear real-life analogies and guide me step-by-step."</div>
+      <p><strong>For Academic Learning:</strong></p>
+      <div class="prompt-box">"You are a patient academic tutor. Break down complex concepts into 3 key points and give me a practice question after each explanation."</div>
+      <p><strong>For Financial Skills:</strong></p>
+      <div class="prompt-box">"You are a youth financial coach. Teach me money management and budgeting through simple, practical everyday examples."</div>
+      <p><strong>For Emotional Support:</strong></p>
+      <div class="prompt-box">"You are a supportive mindset guide. Help me handle study stress, practice mindfulness, and give me positive encouragement."</div>
+    </section>
+    <!-- SDG 4 Section -->
+    <section id="sdg4" class="info-card">
+      <h2>What is SDGs 4? (Educational Equity)</h2>
+      <p><strong>UN Sustainable Development Goal 4 (SDG 4)</strong> aims to ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.</p>
+      <p>By leveraging free AI tools like Gemini, we can make personal tutoring accessible to every student everywhere regardless of background.</p>
+    </section>
+    <!-- Donation Section -->
+    <section class="info-card">
+      <h2>How You Can Support Global Education</h2>
+      <p>Support emergency education and learning materials for vulnerable children worldwide:</p>
+      <p style="margin-top: 1rem;">
+        <a href="https://www.savethechildren.org" target="_blank" rel="noopener" class="btn-donate" style="display: inline-block; text-decoration: none;">Donate via Save the Children ↗</a>
+      </p>
+    </section>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 MY AI TEACHER Initiative. Promoting Educational Equity through AI (SDG 4).</p>
+  </footer>
+</body>
+</html>
